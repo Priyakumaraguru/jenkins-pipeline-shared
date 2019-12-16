@@ -2,26 +2,13 @@ import jenkins.*
 import jenkins.model.*
 import hudson.*
 import hudson.model.*
-
+	def call(body){
 long startTime = System.currentTimeMillis();
 
 //Get value from String Parameter
 MAX_BUILDS = manager.build.buildVariables.get("MAX_BUILDS").toInteger()
 
-for (job in Jenkins.instance.items)
-{
-    SortedMap<Integer,List<String>> sprint_paths_map  = new TreeMap<Integer, List<String>>(new DescOrder());
-
-    manager.listener.logger.println "\n ***** Job Name: "+job.name+" *****"
-    
-        if(job.workspace!=null && job.workspace!="")  //Check if there is a workspace associated with the Job
-        {
-            manager.listener.logger.println "Workspace path : " + job.workspace
-            
-            String workspace = job.workspace
-            
-            File folder = new File(workspace)
-            
+for (job in Jenkins.instance.items)  
             if(folder!=null && folder.exists()) //Check if the Workspace folder exists
             {
                 // Get all files and folders within the Workspace of current job. 
@@ -31,15 +18,13 @@ for (job in Jenkins.instance.items)
               	
               	//Determine which sprint_number to delete
                 File[] files = new File(workspace).listFiles().each{
-                  
+                     
                   if(it!=null && it.exists() && !it.isFile()){
 				  
-                    sprint_number = it.name.find( /\d+/ )!=null ? it.name.find( /\d+/ ).toInteger() : null
+                    sprint_number = it.name.find( /\d+/ )!=null ? it.name.find( /\d+/ ).toInteger() : null  
   
                     if(sprint_number!=null)
-                    {
-                      if(sprint_paths_map.containsKey(sprint_number))
-                          sprint_paths_map.get(sprint_number).add(it.absolutePath)
+                    {       
                       else
                       {
                           List<String> list = new ArrayList<String>()
@@ -112,3 +97,4 @@ long endTime   = System.currentTimeMillis();
 long totalTime = (endTime - startTime)/1000;
 
 manager.listener.logger.println "Total Run time in seconds : " + totalTime
+}
