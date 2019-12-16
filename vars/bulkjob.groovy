@@ -58,10 +58,6 @@ for (job in Jenkins.instance.items)
                 manager.listener.logger.println "Workspace is empty or doesn't exist"
             }
         }
-        else
-        {
-            manager.listener.logger.println "No Workspace is associated with this job"
-        }
     
 }
 
