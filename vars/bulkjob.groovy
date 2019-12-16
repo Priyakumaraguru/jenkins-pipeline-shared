@@ -4,7 +4,7 @@ import hudson.*
 import hudson.model.*
 
 //manager.listener.logger.println new Date(System.currentTimeMillis()).format('MM/dd/yyyy hh:mm:ss a') + " / " + " -- Start Time" 
-
+    def call(body){
 //Get value from String Parameter
 MAX_BUILDS = manager.build.buildVariables.get("MAX_BUILDS").toInteger()
 
@@ -77,3 +77,4 @@ for (job in Jenkins.instance.items)
         manager.listener.logger.print "--Skipped"
     }
 }
+    }
