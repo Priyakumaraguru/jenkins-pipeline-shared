@@ -59,7 +59,6 @@ for (job in Jenkins.instance.items)
             }
         }
     
-}
 
 //Function to delete the folder
 
