@@ -25,12 +25,11 @@ for (job in Jenkins.instance.items)
   
                     if(sprint_number!=null)
                     {       
-                      else
-                      {
+                     
                           List<String> list = new ArrayList<String>()
                           list.add(it.absolutePath);
                           sprint_paths_map.put(sprint_number, list)
-                      }
+          
                     }
                     sprint_number = null
                   }
